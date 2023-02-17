@@ -11,12 +11,18 @@ plug "kak-lsp/kak-lsp" do %{
     mkdir -p ~/.config/kak-lsp
     cp -n kak-lsp.toml ~/.config/kak-lsp/
 }
+lsp-enable
+map global object f '<a-semicolon>lsp-object Function Method<ret>' -docstring 'LSP function or method'
+map global object t '<a-semicolon>lsp-object Class Interface Struct<ret>' -docstring 'LSP class interface or struct'
+map global user d ':lsp-find-error<ret>' -docstring 'Jump to next diagnostic'
+map global user l ':enter-user-mode lsp<ret>' -docstring 'LSP mode'
+
 
 plug "gustavo-hms/luar" %{
     plug "gustavo-hms/peneira" %{
         require-module peneira
-        map global user f ':peneira-files<ret>'
-        map global user F ':peneira-local-files<ret>'
+        map global user f ':peneira-files<ret>' -docstring 'Find files'
+        map global user F ':peneira-local-files<ret>' -docstring 'Find files relative to current buffer'
     }
 }
 
