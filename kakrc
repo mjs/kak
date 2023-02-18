@@ -17,7 +17,6 @@ map global object t '<a-semicolon>lsp-object Class Interface Struct<ret>' -docst
 map global user d ':lsp-find-error<ret>' -docstring 'Jump to next diagnostic'
 map global user l ':enter-user-mode lsp<ret>' -docstring 'LSP mode'
 
-
 plug "gustavo-hms/luar" %{
     plug "gustavo-hms/peneira" %{
         require-module peneira
@@ -35,3 +34,4 @@ plug "lePerdu/kakboard" %{
 
 colorscheme tomorrow-night
 set global autocomplete prompt  # Turn off automatic completion (it's annoying)
+set global ui_options terminal_enable_mouse=0
