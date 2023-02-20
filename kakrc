@@ -34,7 +34,7 @@ plug "lePerdu/kakboard" %{
 
 colorscheme tomorrow-night
 set global autocomplete prompt  # Turn off automatic completion (it's annoying)
-set global ui_options terminal_enable_mouse=0
+set global ui_options terminal_enable_mouse=0 terminal_set_title=0
 addhl global/ wrap  # Soft wrapping
 
 # Manually wrap
