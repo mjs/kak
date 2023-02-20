@@ -12,6 +12,8 @@ plug "kak-lsp/kak-lsp" do %{
     cp -n kak-lsp.toml ~/.config/kak-lsp/
 }
 lsp-enable
+lsp-auto-signature-help-enable
+lsp-inlay-diagnostics-enable global
 map global object f '<a-semicolon>lsp-object Function Method<ret>' -docstring 'LSP function or method'
 map global object t '<a-semicolon>lsp-object Class Interface Struct<ret>' -docstring 'LSP class interface or struct'
 map global user d ':lsp-find-error<ret>' -docstring 'Jump to next diagnostic'
