@@ -1,5 +1,4 @@
 # TODO
-# less dynamic titlebar - don't need current line, col and mode
 # Buffer Fuzzy finder
 
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
@@ -42,3 +41,29 @@ addhl global/ wrap  # Soft wrapping
 map global normal = '|fmt -w $kak_opt_autowrap_column<ret>' # Manually wrap
 
 set global grepcmd 'rg --vimgrep'
+
+define-command find -docstring "find files" -params 1 %{ edit %arg{1} }
+complete-command find shell-script-candidates %{ fd --type f }
+
+define-command -docstring 'Invoke skim to open a file' -params 0 sk-edit %{
+    evaluate-commands %sh{
+        file="$(fd --type f |TMUX="${kak_client_env_TMUX}" sk-tmux)"
+        if [ -n "$file" ]; then
+            printf 'edit "%s"\n' "$file"
+        fi
+    }
+}
+
+define-command -docstring 'Invoke fzf to open a file' -params 0 fzf-edit %{
+    evaluate-commands %sh{
+        if [ -z "${kak_client_env_TMUX}" ]; then
+            printf 'fail "client was not started under tmux"\n'
+        else
+            file="$(fd --type f |TMUX="${kak_client_env_TMUX}" fzf-tmux -d 15)"
+            if [ -n "$file" ]; then
+                printf 'edit "%s"\n' "$file"
+            fi
+        fi
+    }
+}
+
